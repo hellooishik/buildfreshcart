@@ -45,16 +45,16 @@ exports.getOrderDetails = async (req, res) => {
 exports.updateOrderStatus = async (req, res) => {
   try {
     const { status } = req.body;
-
     const order = await Order.findById(req.params.id);
-    if (!order) {
-      return res.status(404).json({ message: "Order not found" });
-    }
+    if (!order) return res.status(404).json({ message: "Order not found" });
 
     order.status = status;
     await order.save();
 
-    res.status(200).json({ message: "Order status updated", order });
+    // ✅ Emit event for real-time order tracking
+    req.app.get("io").emit("orderStatus", order);
+
+    res.status(200).json(order);
   } catch (error) {
     res.status(500).json({ message: "Failed to update order status", error: error.message });
   }

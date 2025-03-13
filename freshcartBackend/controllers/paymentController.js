@@ -21,6 +21,7 @@ exports.createRazorpayOrder = async (req, res) => {
         receipt: `receipt_${Date.now()}`,
         payment_capture: 1,
       };
+      
   
       console.log("🟢 Options Sent to Razorpay:", options);
   

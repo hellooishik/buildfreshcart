@@ -1,11 +1,19 @@
-// const express = require("express");
-// const router = express.Router();
-// const { getCart, addToCart, removeFromCart } = require("../controllers/cartController");  // ✅ Correct import
+const express = require("express");
+const { addToCart, getCart, removeFromCart, clearCart } = require("../controllers/cartController");
+const { protect } = require("../middleware/authMiddleware");
 
-// const authMiddleware = require("../middleware/authMiddleware");
-// const { protect } = require("../middleware/authMiddleware"); // ✅ Use destructuring
-// router.get("/", protect, getCart); // ✅ Correct usage
-// router.post("/add", authMiddleware, addToCart);
-// router.delete("/remove/:id", authMiddleware, removeFromCart);
+const router = express.Router();
 
-// module.exports = router;
+// ✅ Get user's cart
+router.get("/", protect, getCart);
+
+// ✅ Add item to cart
+router.post("/add", protect, addToCart);
+
+// ✅ Remove an item from cart
+router.delete("/remove/:productId", protect, removeFromCart);
+
+// ✅ Clear the entire cart
+router.delete("/clear", protect, clearCart);
+
+module.exports = router;

@@ -15,6 +15,9 @@ const categoryRoutes = require("./routes/category");
 const authRoutes = require("./routes/authRoutes");
 const productRoutes = require("./routes/product"); // ✅ Ensure correct casing
 const orderRoutes = require("./routes/orderRoutes"); // ✅ Added order routes
+const adminRoutes = require("./routes/adminRoutes"); // ✅ Import Admin Routes
+const couponRoutes = require("./routes/couponRoutes"); // ✅ Import coupon routes
+
 
 // Middleware
 app.use(express.json());
@@ -24,6 +27,8 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 console.log("✅ Order Routes Loaded");
 app.use("/orders", orderRoutes); // ✅ Register order routes
+app.use("/admin", adminRoutes); // ✅ Register Admin Routes
+app.use("/coupons", couponRoutes); // ✅ Register coupon routes
 
 // Routes
 app.use("/auth", authRoutes);

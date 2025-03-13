@@ -39,7 +39,7 @@ exports.getOrderDetails = async (req, res) => {
       console.error("🔥 Error fetching order details:", error.message);
       res.status(500).json({ message: "Failed to fetch order details", error: error.message });
     }
-  };
+  };  
 
 // Update order status
 exports.updateOrderStatus = async (req, res) => {

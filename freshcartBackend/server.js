@@ -14,6 +14,7 @@ const app = express();
 const categoryRoutes = require("./routes/category");
 const authRoutes = require("./routes/authRoutes");
 const productRoutes = require("./routes/product"); // ✅ Ensure correct casing
+const orderRoutes = require("./routes/orderRoutes"); // ✅ Added order routes
 
 // Middleware
 app.use(express.json());
@@ -21,6 +22,8 @@ app.use(cors());
 app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(cookieParser());
+console.log("✅ Order Routes Loaded");
+app.use("/orders", orderRoutes); // ✅ Register order routes
 
 // Routes
 app.use("/auth", authRoutes);

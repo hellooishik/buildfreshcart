@@ -1,4 +1,3 @@
-
 const mongoose = require("mongoose");
 
 const OrderSchema = new mongoose.Schema(
@@ -6,7 +5,7 @@ const OrderSchema = new mongoose.Schema(
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
     products: [
       {
-        product: { type: mongoose.Schema.Types.ObjectId, ref: "Product" },
+        product: { type: mongoose.Schema.Types.ObjectId, ref: "Product", required: true }, // ✅ Ensure ref is correct
         quantity: { type: Number, required: true },
       },
     ],

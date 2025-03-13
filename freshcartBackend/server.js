@@ -17,6 +17,7 @@ const productRoutes = require("./routes/product"); // ✅ Ensure correct casing
 const orderRoutes = require("./routes/orderRoutes"); // ✅ Added order routes
 const adminRoutes = require("./routes/adminRoutes"); // ✅ Import Admin Routes
 const couponRoutes = require("./routes/couponRoutes"); // ✅ Import coupon routes
+const paymentRoutes = require("./routes/paymentRoutes"); // ✅ Import Payment Routes
 
 
 // Middleware
@@ -29,6 +30,7 @@ console.log("✅ Order Routes Loaded");
 app.use("/orders", orderRoutes); // ✅ Register order routes
 app.use("/admin", adminRoutes); // ✅ Register Admin Routes
 app.use("/coupons", couponRoutes); // ✅ Register coupon routes
+app.use("/pay", paymentRoutes); // ✅ Register Payment Routes
 
 // Routes
 app.use("/auth", authRoutes);

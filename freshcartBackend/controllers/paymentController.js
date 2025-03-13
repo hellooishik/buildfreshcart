@@ -1,16 +1,27 @@
 const Razorpay = require("razorpay");
-const stripeKey = process.env.STRIPE_SECRET_KEY || 'dummy_key';
-const stripe = require('stripe')(stripeKey);
+const stripeKey = process.env.STRIPE_SECRET_KEY || null;
+const stripe = stripeKey ? require('stripe')(stripeKey) : null;
 const crypto = require("crypto");
 
 // ✅ Initialize Razorpay
-const razorpay = new Razorpay({
-  key_id: process.env.RAZORPAY_KEY_ID,
-  key_secret: process.env.RAZORPAY_SECRET,
-});
+const razorpayKeyId = process.env.RAZORPAY_KEY_ID || null;
+const razorpayKeySecret = process.env.RAZORPAY_SECRET || null;
+let razorpay = null;
+
+if (razorpayKeyId && razorpayKeySecret) {
+  razorpay = new Razorpay({
+    key_id: razorpayKeyId,
+    key_secret: razorpayKeySecret,
+  });
+} else {
+  console.log("⚠️ Razorpay API keys are missing. Payment routes will not work.");
+}
 
 // ✅ Create Razorpay Order
 exports.createRazorpayOrder = async (req, res) => {
+    if (!razorpay) {
+      return res.status(503).json({ message: "Razorpay service unavailable. API keys are missing." });
+    }
     try {
       const { amount, currency } = req.body;
   
@@ -38,11 +49,14 @@ exports.createRazorpayOrder = async (req, res) => {
 
 // ✅ Verify Razorpay Payment
 exports.verifyRazorpayPayment = async (req, res) => {
+  if (!razorpayKeySecret) {
+    return res.status(503).json({ message: "Razorpay verification unavailable. API keys are missing." });
+  }
   try {
     const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body;
 
     const generated_signature = crypto
-      .createHmac("sha256", process.env.RAZORPAY_SECRET)
+      .createHmac("sha256", razorpayKeySecret)
       .update(razorpay_order_id + "|" + razorpay_payment_id)
       .digest("hex");
 
@@ -58,6 +72,9 @@ exports.verifyRazorpayPayment = async (req, res) => {
 
 // ✅ Stripe Payment
 exports.createStripePayment = async (req, res) => {
+  if (!stripe) {
+    return res.status(503).json({ message: "Stripe service unavailable. API key is missing." });
+  }
   try {
     const { amount, currency, paymentMethodId } = req.body;
 

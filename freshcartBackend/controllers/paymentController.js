@@ -1,5 +1,6 @@
 const Razorpay = require("razorpay");
-const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+const stripeKey = process.env.STRIPE_SECRET_KEY || 'dummy_key';
+const stripe = require('stripe')(stripeKey);
 const crypto = require("crypto");
 
 // ✅ Initialize Razorpay

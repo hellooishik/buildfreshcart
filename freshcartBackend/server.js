@@ -81,7 +81,36 @@ mongoose
 app.get("/", (req, res) => {
   res.send("FreshCart API is Running");
 });
+// ✅ LOGIN Endpoint
+app.post("/auth/login", async (req, res) => {
+  const { email, password } = req.body;
+  const user = await User.findOne({ email });
 
+  if (user && (await bcrypt.compare(password, user.password))) {
+    req.session.user = user; // Store user in session
+    res.json({ user });
+  } else {
+    res.status(401).json({ message: "Invalid email or password" });
+  }
+});
+
+// ✅ GET AUTHENTICATED USER Endpoint
+app.get("/auth/user", (req, res) => {
+  if (req.session.user) {
+    res.json({ user: req.session.user });
+  } else {
+    res.status(401).json({ message: "Not logged in" });
+  } 
+});
+
+// ✅ LOGOUT Endpoint
+app.post("/auth/logout", (req, res) => {
+  req.session.destroy();
+  res.json({ message: "Logged out successfully" });
+});
+
+mongoose.connect("mongodb://localhost:27017/mydatabase", { useNewUrlParser: true });
+app.listen(5000, () => console.log("Server running on port 5000"));
 // Start Server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

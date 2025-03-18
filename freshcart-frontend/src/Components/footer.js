@@ -1,7 +1,7 @@
 import React from 'react';
 import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn, FaPinterestP } from 'react-icons/fa';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+// update
 export default function Footer() {
   return (
     <footer className="bg-light py-5">
@@ -17,7 +17,7 @@ export default function Footer() {
               ))}
             </ul>
           </div>
-
+                
           {/* Categories */}
           <div className="col-md-4 mb-4 mb-md-0">
             <h4 className="fw-bold mb-3">Categories</h4>

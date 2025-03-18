@@ -1,0 +1,52 @@
+/* customerReviews.css */
+.container {
+    background-color: #fffafc;
+  }
+  
+  .carousel-inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .carousel-item .card {
+    max-width: 350px;
+    background-color: #fff;
+    border-radius: 12px;
+    border: none;
+  }
+  
+  .blockquote {
+    font-size: 1.2rem;
+    color: #d63384;
+    font-weight: bold;
+  }
+  
+  footer p {
+    margin: 0;
+  }
+  
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    background-color: #d63384;
+    border-radius: 50%;
+  }
+  
+  .carousel-control-prev,
+  .carousel-control-next {
+    width: 50px;
+  }
+  
+  .carousel-control-prev:hover,
+  .carousel-control-next:hover {
+    opacity: 0.8;
+  }
+  
+  footer .fw-bold {
+    font-size: 1rem;
+  }
+  
+  footer .text-muted {
+    font-size: 0.9rem;
+  }
+  

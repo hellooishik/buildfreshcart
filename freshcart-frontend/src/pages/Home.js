@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "../css/homepage.css";
-import LoggedInHomePage from "./LoggedInHomePage";
-import Header from "../Components/header";
-import Hero from "../Components/hero";
-import Footer from "../Components/footer";
-
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '../css/homepage.css';
+import LoggedInHomePage from './LoggedInHomePage';
+import Header from '../Components/header';
+import Hero from '../Components/hero';
+import Footer from '../Components/footer';
+import CustomerReviews from '../Components/CustomerReviews';
 export default function HomePage() {
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
@@ -15,16 +15,16 @@ export default function HomePage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem("user")) || null;
+    const storedUser = JSON.parse(localStorage.getItem('user')) || null;
     setUser(storedUser);
 
-    axios.get("http://localhost:4000/categories")
+    axios.get('http://localhost:4000/categories')
       .then((response) => setCategories(response.data))
-      .catch((error) => console.error("Error fetching categories:", error));
+      .catch((error) => console.error('Error fetching categories:', error));
 
-    axios.get("http://localhost:4000/products")
+    axios.get('http://localhost:4000/products')
       .then((response) => setProducts(response.data))
-      .catch((error) => console.error("Error fetching products:", error));
+      .catch((error) => console.error('Error fetching products:', error));
   }, []);
 
   const getImageUrl = (imagePath) => {
@@ -79,6 +79,7 @@ export default function HomePage() {
         )}
       </div>
 
+      <CustomerReviews />
       <Footer />
     </div>
   );

@@ -27,6 +27,10 @@ export default function HomePage() {
       .catch((error) => console.error("Error fetching products:", error));
   }, []);
 
+  const getImageUrl = (imagePath) => {
+    return `http://localhost:4000${imagePath.replace(/\\/g, '/')}`;
+  };
+
   if (user) {
     return <LoggedInHomePage user={user} products={products} categories={categories} />;
   }
@@ -60,7 +64,7 @@ export default function HomePage() {
             {products.map((product) => (
               <div className="col-md-4" key={product._id}>
                 <div className="product-card p-3 text-center bg-white shadow-sm rounded border position-relative">
-                  <img src={product.image} alt={product.name} className="w-100 rounded-top" />
+                  <img src={getImageUrl(product.image)} alt={product.name} className="w-100 rounded-top" />
                   <div className="p-3">
                     <h5 className="fw-bold">{product.name}</h5>
                     <p className="text-muted">${product.price}</p>

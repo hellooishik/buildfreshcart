@@ -1,10 +1,11 @@
 import React, { useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../css/productDisplay.css';
 
 const ProductDisplay = ({ products, getImageUrl }) => {
   const scrollRef = useRef(null);
+  const navigate = useNavigate();
 
-  // Smooth scroll functions
   const scrollLeft = () => {
     if (scrollRef.current) {
       scrollRef.current.scrollBy({ left: -300, behavior: 'smooth' });
@@ -17,7 +18,10 @@ const ProductDisplay = ({ products, getImageUrl }) => {
     }
   };
 
-  // Ensure products are available
+  const handleProductClick = (id) => {
+    navigate(`/products/${id}`);
+  };
+
   if (!products || products.length === 0) {
     return <p className="no-products">No products available</p>;
   }
@@ -27,7 +31,7 @@ const ProductDisplay = ({ products, getImageUrl }) => {
       <button className="scroll-btn left" onClick={scrollLeft}>&lt;</button>
       <div className="product-scroll" ref={scrollRef}>
         {products.map((product) => (
-          <div className="product-card" key={product._id}>
+          <div className="product-card" key={product._id} onClick={() => handleProductClick(product._id)}>
             <img src={getImageUrl(product.image)} alt={product.name} className="product-img" />
             <h5 className="fw-bold">{product.name}</h5>
             <p className="text-muted">${product.price.toFixed(2)}</p>

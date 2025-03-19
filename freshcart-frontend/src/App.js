@@ -8,37 +8,56 @@ import Checkout from "./pages/Checkout";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import LoggedInHomePage from "./pages/LoggedInHomePage";
-import ProductDetails from "./pages/ProductDetails"; 
+import ProductDetails from "./pages/ProductDetails";
 
 function App() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/auth/user", { withCredentials: true })
-      .then((response) => {
+    const fetchUser = async () => {
+      try {
+        const response = await axios.get("http://localhost:4000/auth/user", {
+          withCredentials: true,
+        });
         if (response.data.user) {
           setUser(response.data.user);
         }
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error("Error fetching user:", error);
-        setUser(null);
-      })
-      .finally(() => setLoading(false));
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchUser();
   }, []);
+
   if (loading) return <div>Loading...</div>;
+
   return (
     <Router>
       <Routes>
-        <Route path="/" element={user ? <LoggedInHomePage user={user} /> : <Home />} />
+        <Route
+          path="/"
+          element={user ? <LoggedInHomePage user={user} /> : <Home />}
+        />
         <Route path="/login" element={<Login setUser={setUser} />} />
         <Route path="/register" element={<Register />} />
         <Route path="/products" element={<Products />} />
-        <Route path="/products/:productId" element={<ProductDetails />} /> {/* Product Details Route */}
+        <Route path="/products/:productId" element={<ProductDetails />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/checkout" element={<Checkout />} />
+        {/* Enhanced 404 Page */}
+        <Route
+          path="*"
+          element={
+            <div>
+              <h2>404 - Page Not Found</h2>
+              <p>Oops! The page you're looking for doesn't exist.</p>
+              <a href="/">Go back to Home</a>
+            </div>
+          }
+        />
       </Routes>
     </Router>
   );

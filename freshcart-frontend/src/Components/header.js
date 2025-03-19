@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { FaShoppingCart, FaSearch, FaMapMarkerAlt } from 'react-icons/fa';
+import logo from "../Assets/logo.png"
 
 export default function Header() {
   const [location, setLocation] = useState('Fetching location...');
@@ -35,20 +36,28 @@ export default function Header() {
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm p-3">
-      <div className="container-fluid d-flex justify-content-between align-items-center">
+      <div className="container d-flex justify-content-between align-items-center">
         {/* Brand Name */}
         <Link className="navbar-brand fw-bold" style={{ color: '#FFC107' }} to="/">
-          fresh<span style={{ color: '#4CAF50' }}>cart</span>
-        </Link>
+  <img 
+    src={logo}
+    alt="Meatigo Logo" 
+    style={{ height: '60px', marginRight: '10px' }}
+  />
+  <span style={{ color: 'black', fontFamily: 'serif', fontSize : 20 }}>Meatigo</span>
+</Link>
 
         {/* Location Display */}
         <div className="d-flex align-items-center">
-          <FaMapMarkerAlt className="text-danger me-2" />
-          <div>
-            <span className="fw-bold">Delivery in 8 minutes</span>
-            <p className="mb-0 text-muted" style={{ fontSize: '14px' }}>{location}</p>
-          </div>
-        </div>
+  <FaMapMarkerAlt className="text-danger me-2" />
+  <div>
+    <span className="fw-bold">Delivery in 8 minutes</span>
+    <p className="mb-0 text-muted" style={{ fontSize: '14px', maxWidth: '150px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+      {location}
+    </p>
+  </div>
+</div>
+
 
         {/* Search Bar */}
         <div className="position-relative" style={{ width: '40%' }}>

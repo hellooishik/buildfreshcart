@@ -15,7 +15,8 @@ const server = http.createServer(app);
 // ✅ WebSockets Setup
 const io = new Server(server, {
   cors: {
-    origin: "*",
+    origin: "http://localhost:3000",
+    credentials: true,
     methods: ["GET", "POST"]
   }
 });
@@ -50,7 +51,10 @@ const cartRoutes = require("./routes/cartRoutes");
 
 // ✅ Middleware
 app.use(express.json());
-app.use(cors({ origin: "*" })); // Allow all origins
+app.use(cors({
+  origin: "http://localhost:3000", // Ensure no trailing slash
+  credentials: true // Allow credentials (cookies, sessions)
+}));
 app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(cookieParser());

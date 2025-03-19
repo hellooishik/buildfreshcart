@@ -8,11 +8,13 @@ import Header from '../Components/header';
 import Hero from '../Components/hero';
 import Footer from '../Components/footer';
 import CustomerReviews from '../Components/CustomerReviews';
+import CategorySection from '../Components/CategorySection';
+import ProductDisplay from '../Components/productDisplay';
+
 export default function HomePage() {
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
   const [user, setUser] = useState(null);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem('user')) || null;
@@ -40,44 +42,17 @@ export default function HomePage() {
       <Header />
       <Hero />
 
-      <div className="container py-5">
-        <h2 className="text-center mb-4 fw-bold">Fresh Meat, Eggs & Fishes</h2>
-        {categories.length > 0 ? (
-          <div className="row g-3">
-            {categories.map((category) => (
-              <div className="col-md-4" key={category._id}>
-                <div className="category-card p-4 text-center bg-light shadow-sm rounded border">
-                  {category.name}
-                </div>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <p className="text-center">No categories available.</p>
-        )}
-      </div>
-
-      <div className="container py-5">
-        <h2 className="text-center mb-4 fw-bold">Fresh Deals for You</h2>
-        {products.length > 0 ? (
-          <div className="row g-3">
-            {products.map((product) => (
-              <div className="col-md-4" key={product._id}>
-                <div className="product-card p-3 text-center bg-white shadow-sm rounded border position-relative">
-                  <img src={getImageUrl(product.image)} alt={product.name} className="w-100 rounded-top" />
-                  <div className="p-3">
-                    <h5 className="fw-bold">{product.name}</h5>
-                    <p className="text-muted">${product.price}</p>
-                    <button className="btn btn-success w-100">Add to Cart</button>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <p className="text-center">No products available.</p>
-        )}
-      </div>
+      {/* Category Section Component */}
+      <CategorySection categories={categories} />
+`
+              <div className="container py-5">
+          <h2 className="text-center mb-4 fw-bold">Bestseller</h2>
+          {products.length > 0 ? (
+            <ProductDisplay products={products} getImageUrl={getImageUrl} />
+          ) : (
+            <p className="text-center">No products available.</p>
+          )}
+        </div>`
 
       <CustomerReviews />
       <Footer />

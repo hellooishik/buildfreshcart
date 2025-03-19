@@ -1,0 +1,109 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+.lato-regular {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+.varela-round-regular {
+  font-family: "Varela Round", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.lato-light {
+  font-family: "Lato", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.container {
+  background-color: #fff;
+  padding: 20px;
+}
+
+.category-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border-radius: 50%;
+  padding: 12px;
+  width: 140px;
+  height: 140px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.category-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(253, 173, 1, 0.15);
+}
+
+.category-img {
+  width: 100px;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.category-name {
+  font-family: "Varela Round", sans-serif;
+  font-size: 14px;
+  color: #555;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .category-card {
+    width: 120px;
+    height: 120px;
+  }
+
+  .category-img {
+    width: 90px;
+    height: 90px;
+  }
+
+  .category-name {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 768px) {
+  .category-card {
+    width: 100px;
+    height: 100px;
+    padding: 8px;
+  }
+
+  .category-img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .category-name {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .category-card {
+    width: 90px;
+    height: 90px;
+    padding: 6px;
+  }
+
+  .category-img {
+    width: 70px;
+    height: 70px;
+  }
+
+  .category-name {
+    font-size: 11px;
+  }
+}

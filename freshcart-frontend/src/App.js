@@ -28,9 +28,7 @@ function App() {
       })
       .finally(() => setLoading(false));
   }, []);
-
   if (loading) return <div>Loading...</div>;
-
   return (
     <Router>
       <Routes>
@@ -38,7 +36,7 @@ function App() {
         <Route path="/login" element={<Login setUser={setUser} />} />
         <Route path="/register" element={<Register />} />
         <Route path="/products" element={<Products />} />
-        <Route path="/products/:productId" element={<ProductDetails />} /> {/* ✅ Product Details Route */}
+        <Route path="/products/:productId" element={<ProductDetails />} /> {/* Product Details Route */}
         <Route path="/cart" element={<Cart />} />
         <Route path="/checkout" element={<Checkout />} />
       </Routes>

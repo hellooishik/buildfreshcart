@@ -1,52 +1,68 @@
-/* customerReviews.css */
-.container {
-    background-color: #fffafc;
+.review-section {
+  text-align: center;
+  padding: 60px 20px;
+  background-color: #fff;
+}
+
+h2 {
+  font-size: 2.5rem;
+  color: #000;
+  font-weight: 700;
+}
+
+.subtext {
+  color: #666;
+  font-size: 1.1rem;
+  margin-bottom: 40px;
+}
+
+.review-container {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding-bottom: 20px;
+  scrollbar-width: none;
+}
+
+.review-container::-webkit-scrollbar {
+  display: none;
+}
+
+.review-card {
+  min-width: 300px;
+  max-width: 320px;
+  background: linear-gradient(135deg, #ffe2e2 0%, #ffd6e0 100%);
+  border-radius: 20px;
+  padding: 30px;
+  text-align: left;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+.quote {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #d72638;
+  margin-bottom: 20px;
+}
+
+.profile {
+  display: flex;
+  flex-direction: column;
+}
+
+.name {
+  font-weight: bold;
+  font-size: 1rem;
+  margin-bottom: 4px;
+}
+
+.location {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  .review-card {
+    min-width: 280px;
   }
-  
-  .carousel-inner {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .carousel-item .card {
-    max-width: 350px;
-    background-color: #fff;
-    border-radius: 12px;
-    border: none;
-  }
-  
-  .blockquote {
-    font-size: 1.2rem;
-    color: #d63384;
-    font-weight: bold;
-  }
-  
-  footer p {
-    margin: 0;
-  }
-  
-  .carousel-control-prev-icon,
-  .carousel-control-next-icon {
-    background-color: #d63384;
-    border-radius: 50%;
-  }
-  
-  .carousel-control-prev,
-  .carousel-control-next {
-    width: 50px;
-  }
-  
-  .carousel-control-prev:hover,
-  .carousel-control-next:hover {
-    opacity: 0.8;
-  }
-  
-  footer .fw-bold {
-    font-size: 1rem;
-  }
-  
-  footer .text-muted {
-    font-size: 0.9rem;
-  }
-  
+}

@@ -14,13 +14,43 @@ export default function Header() {
     navigator.geolocation.getCurrentPosition(
       (position) => {
         const { latitude, longitude } = position.coords;
-        fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`)
-          .then((response) => response.json())
-          .then((data) => setLocation(data.display_name || 'Location not available'))
-          .catch(() => setLocation('Unable to fetch location'));
+    
+        // Ensure coordinates are valid
+        if (!latitude || !longitude) {
+          setLocation('Invalid coordinates');
+          return;
+        }
+    
+        // Add a custom user-agent to comply with API requirements
+        fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`, {
+          headers: {
+            'User-Agent': 'YourAppName/1.0 (your@email.com)',
+          },
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error('Failed to fetch location');
+            }
+            return response.json();
+          })
+          .then((data) => {
+            if (data.display_name) {
+              setLocation(data.display_name);
+            } else {
+              setLocation('Location not available');
+            }
+          })
+          .catch((error) => {
+            console.error('Error fetching location:', error);
+            setLocation('Unable to fetch location');
+          });
       },
-      () => setLocation('Location access denied')
+      (error) => {
+        console.error('Geolocation error:', error);
+        setLocation('Location access denied');
+      }
     );
+    
 
     // Fetch products for search
     axios

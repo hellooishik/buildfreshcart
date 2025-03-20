@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/homepage.css';
@@ -15,23 +14,22 @@ export default function HomePage() {
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
   const [user, setUser] = useState(null);
+  const [selectedProductId, setSelectedProductId] = useState(null);
 
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem('user')) || null;
     setUser(storedUser);
 
     axios.get('http://localhost:4000/categories')
-      .then((response) => setCategories(response.data))
-      .catch((error) => console.error('Error fetching categories:', error));
+      .then(response => setCategories(response.data))
+      .catch(error => console.error('Error fetching categories:', error));
 
     axios.get('http://localhost:4000/products')
-      .then((response) => setProducts(response.data))
-      .catch((error) => console.error('Error fetching products:', error));
+      .then(response => setProducts(response.data))
+      .catch(error => console.error('Error fetching products:', error));
   }, []);
 
-  const getImageUrl = (imagePath) => {
-    return `http://localhost:4000${imagePath.replace(/\\/g, '/')}`;
-  };
+  const getImageUrl = (imagePath) => `http://localhost:4000${imagePath.replace(/\\/g, '/')}`;
 
   if (user) {
     return <LoggedInHomePage user={user} products={products} categories={categories} />;
@@ -41,19 +39,19 @@ export default function HomePage() {
     <div className="homepage-container">
       <Header />
       <Hero />
-
-   
-`
-              <div className="container-fluid py-5">
-          {products.length > 0 ? (
-            <ProductDisplay products={products} getImageUrl={getImageUrl} />
-          ) : (
-            <p className="text-center">No products available.</p>
-          )}
-        </div>`
-           {/* Category Section Component */}
+      <div className="container-fluid py-5">
+        {products.length > 0 ? (
+          <ProductDisplay 
+            products={products} 
+            getImageUrl={getImageUrl} 
+            selectedProductId={selectedProductId}
+            setSelectedProductId={setSelectedProductId}
+          />
+        ) : (
+          <p className="text-center">No products available.</p>
+        )}
+      </div>
       <CategorySection categories={categories} />
-
       <CustomerReviews />
       <Footer />
     </div>

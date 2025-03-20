@@ -18,9 +18,9 @@ const CategorySection = () => {
   }, []);
 
   return (
-    <div className="container py-5">
-      <h2 className="mb-4 lato-regular">Shop by categories</h2>
-      <p className='.lato-light'>Freshest meats and much more!</p>
+    <div className="container-fluid py-5">
+      <h2 className="bestseller-title">Shop by categories</h2>
+      <p className='bestseller-subtitle'>Freshest meats and much more!</p>
       {categories.length > 0 ? (
         <div className="row g-4 justify-content-center">
           {categories.map((category) => (

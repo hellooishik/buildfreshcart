@@ -28,14 +28,18 @@ const ProductDisplay = ({ products, getImageUrl }) => {
 
   return (
     <div className="product-display-container">
+      <h2 className="bestseller-title">Bestsellers</h2>
+      <p className="bestseller-subtitle">Most popular products near you!</p>
       <button className="scroll-btn left" onClick={scrollLeft}>&lt;</button>
       <div className="product-scroll" ref={scrollRef}>
         {products.map((product) => (
           <div className="product-card" key={product._id} onClick={() => handleProductClick(product._id)}>
             <img src={getImageUrl(product.image)} alt={product.name} className="product-img" />
-            <h5 className="fw-bold">{product.name}</h5>
-            <p className="text-muted">${product.price.toFixed(2)}</p>
-            <button className="btn btn-success">Add to Cart</button>
+            <h5 className="product-name">{product.name}</h5>
+            <p className="product-weight">{product.weight}g | {product.pieces} Pieces | Serves {product.serves}</p>
+            <p className="product-price">₹{product.price.toFixed(2)} <span className="original-price">₹{product.originalPrice}</span> <span className="discount">{product.discount}% off</span></p>
+            <p className="delivery-time">⚡ Today in 90 mins</p>
+            <button className="add-to-cart-btn">+</button>
           </div>
         ))}
       </div>

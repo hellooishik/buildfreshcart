@@ -11,6 +11,7 @@ export default function Hero() {
         height: '500px',
       }}
     >
+    {/* The main module is been set to the main draft   */}
       {/* Black Overlay */}
       <div
         className="position-absolute top-0 start-0 w-100 h-100"

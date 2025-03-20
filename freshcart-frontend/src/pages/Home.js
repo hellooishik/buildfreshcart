@@ -42,17 +42,18 @@ export default function HomePage() {
       <Header />
       <Hero />
 
-      {/* Category Section Component */}
-      <CategorySection categories={categories} />
+   
 `
-              <div className="container py-5">
-          <h2 className="text-center mb-4 fw-bold">Bestseller</h2>
+              <div className="container-fluid py-5">
+          <h2 className="text-center mb-4 lato-regular">Shop With Us</h2>
           {products.length > 0 ? (
             <ProductDisplay products={products} getImageUrl={getImageUrl} />
           ) : (
             <p className="text-center">No products available.</p>
           )}
         </div>`
+           {/* Category Section Component */}
+      <CategorySection categories={categories} />
 
       <CustomerReviews />
       <Footer />

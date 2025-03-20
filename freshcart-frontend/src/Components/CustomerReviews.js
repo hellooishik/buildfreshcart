@@ -32,7 +32,7 @@ const reviews = [
 
 const CustomerReviews = () => {
   return (
-    <div className="container py-5">
+    <div className="container-fluid py-5">
       <h2 className="text-center fw-bold">What Our Customers Say</h2>
       <p className="text-center text-muted">Hear it directly from people like you</p>
 

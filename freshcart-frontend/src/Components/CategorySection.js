@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import "../css/CategorySection.css"
-
+import {API_URL} from "../context/config"
 const CategorySection = () => {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get('http://localhost:4000/categories');
+        const response = await axios.get(`${API_URL}/categories`);
         setCategories(response.data);
       } catch (error) {
         console.error("Error fetching categories:", error);
@@ -20,7 +20,7 @@ const CategorySection = () => {
   return (
     <div className="container-fluid py-5">
       <h2 className="bestseller-title">Shop by categories</h2>
-      <p className='bestseller-subtitle'>Freshest meats and much more!</p>
+
       {categories.length > 0 ? (
         <div className="row g-4 justify-content-center">
           {categories.map((category) => (

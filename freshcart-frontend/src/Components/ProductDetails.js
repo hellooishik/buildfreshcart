@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import "../css/productDetails.css"
+import "../css/productDetails.css";
+
+const API_URL = process.env.NODE_ENV === 'development'
+  ? 'http://localhost:4000'
+  : process.env.REACT_APP_API_URL_PROD;
 
 const ProductDetails = () => {
   const { productId } = useParams();
@@ -13,9 +17,10 @@ const ProductDetails = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/products/${productId}`);
+        const response = await axios.get(`${API_URL}/products/${productId}`);
         setProduct(response.data);
-        const similarResponse = await axios.get(`http://localhost:4000/products?category=${response.data.category}`);
+
+        const similarResponse = await axios.get(`${API_URL}/products?category=${response.data.category}`);
         setSimilarProducts(similarResponse.data);
       } catch (err) {
         console.error('Error fetching product:', err);
@@ -35,7 +40,7 @@ const ProductDetails = () => {
     <div className="container my-5">
       <div className="row">
         <div className="col-md-6">
-          <img src={`http://localhost:4000${product.image}`} alt={product.name} className="img-fluid rounded" />
+          <img src={`${API_URL}${product.image}`} alt={product.name} className="img-fluid rounded" />
         </div>
         <div className="col-md-6">
           <h1>{product.name}</h1>
@@ -78,7 +83,7 @@ const ProductDetails = () => {
         {similarProducts.map((similar, index) => (
           <div key={index} className="col-md-3 mb-4">
             <div className="card">
-              <img src={`http://localhost:4000${similar.image}`} alt={similar.name} className="card-img-top" />
+              <img src={`${API_URL}${similar.image}`} alt={similar.name} className="card-img-top" />
               <div className="card-body">
                 <h5 className="card-title">{similar.name}</h5>
                 <p className="text-success">₹{similar.price}</p>

@@ -4,6 +4,9 @@ footer {
     font-family: Arial, sans-serif;
     color: #333;
   }
+  footer.py-5.pt-6 {
+    background-color: white;
+}
   
   .footer-container {
     display: flex;

@@ -45,7 +45,6 @@ export default function HomePage() {
    
 `
               <div className="container-fluid py-5">
-          <h2 className="text-center mb-4 lato-regular">Shop With Us</h2>
           {products.length > 0 ? (
             <ProductDisplay products={products} getImageUrl={getImageUrl} />
           ) : (

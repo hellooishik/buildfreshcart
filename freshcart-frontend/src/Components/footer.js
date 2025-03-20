@@ -4,12 +4,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 // update
 export default function Footer() {
   return (
-    <footer className="bg-light py-5">
-      <div className="container">
+    <footer className="bg-light py-5 pt-6">
+      <div className="container-fluid">
         <div className="row text-center text-md-start">
           
           {/* Useful Links */}
-          <div className="col-md-4 mb-4 mb-md-0">
+          <div className="col-md-4" style={{textAlign : 'center'}}>
             <h4 className="fw-bold mb-3">Useful Links</h4>
             <ul className="list-unstyled">
               {['About', 'Careers', 'Blog', 'Press', 'Lead', 'Value'].map((item) => (
@@ -19,7 +19,7 @@ export default function Footer() {
           </div>
                 
           {/* Categories */}
-          <div className="col-md-4 mb-4 mb-md-0">
+          <div className="col-md-4" style={{textAlign : 'center'}}>
             <h4 className="fw-bold mb-3">Categories</h4>
             <ul className="list-unstyled">
               {['Chicken', 'Meat', 'Fish', 'Eggs'].map((category) => (
@@ -29,7 +29,7 @@ export default function Footer() {
           </div>
 
           {/* App Download and Social Links */}
-          <div className="col-md-4">
+          <div className="col-md-4" >
             <h4 className="fw-bold mb-3">Download App</h4>
             <div className="mb-3">
               <button className="btn btn-dark me-2">App Store</button>

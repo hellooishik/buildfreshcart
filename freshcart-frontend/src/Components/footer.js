@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 // update
 export default function Footer() {
   return (
-    <footer className="bg-light py-5 pt-6">
+<footer className="py-5 pt-6" style={{ backgroundColor: 'white' }}>
       <div className="container-fluid">
         <div className="row text-center text-md-start">
           

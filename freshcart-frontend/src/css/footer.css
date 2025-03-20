@@ -1,11 +1,11 @@
 footer {
-    background-color: #f8f9fa;
+    background-color: #f8f9fa !important;
     padding: 40px 0;
     font-family: Arial, sans-serif;
     color: #333;
   }
   footer.py-5.pt-6 {
-    background-color: white;
+    background-color: white !important;
 }
   
   .footer-container {

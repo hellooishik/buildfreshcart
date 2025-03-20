@@ -26,14 +26,16 @@ const upload = multer({ storage });
 // Create Product
 router.post("/", upload.single("image"), async (req, res) => {
     try {
-        const { name, description, price, category } = req.body;
+        const { name, description, price, category, stock, variations } = req.body;
+
         if (!req.file) {
             return res.status(400).json({ msg: "Image is required" });
         }
 
-        const imageUrl = `/uploads/${req.file.filename}`; // Relative path for easy access
+        const imageUrl = `/uploads/${req.file.filename}`;
+        const parsedVariations = JSON.parse(variations);
 
-        const product = new Product({ name, description, price, category, image: imageUrl });
+        const product = new Product({ name, description, price, category, stock, image: imageUrl, variations: parsedVariations });
         await product.save();
 
         res.status(201).json(product);
@@ -42,7 +44,6 @@ router.post("/", upload.single("image"), async (req, res) => {
         res.status(500).json({ msg: "Server error", error: err.message });
     }
 });
-
 // Get All Products
 router.get("/", async (req, res) => {
     try {

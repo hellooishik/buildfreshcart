@@ -7,20 +7,14 @@ const ProductDisplay = ({ products, getImageUrl }) => {
   const navigate = useNavigate();
 
   const scrollLeft = () => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollBy({ left: -300, behavior: 'smooth' });
-    }
+    scrollRef.current?.scrollBy({ left: -300, behavior: 'smooth' });
   };
 
   const scrollRight = () => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollBy({ left: 300, behavior: 'smooth' });
-    }
+    scrollRef.current?.scrollBy({ left: 300, behavior: 'smooth' });
   };
 
-  const handleProductClick = (id) => {
-    navigate(`/products/${id}`);
-  };
+  const handleProductClick = (id) => navigate(`/products/${id}`);
 
   if (!products || products.length === 0) {
     return <p className="no-products">No products available</p>;
@@ -36,8 +30,20 @@ const ProductDisplay = ({ products, getImageUrl }) => {
           <div className="product-card" key={product._id} onClick={() => handleProductClick(product._id)}>
             <img src={getImageUrl(product.image)} alt={product.name} className="product-img" />
             <h5 className="product-name">{product.name}</h5>
-            <p className="product-weight">{product.weight}g | {product.pieces} Pieces | Serves {product.serves}</p>
-            <p className="product-price">₹{product.price.toFixed(2)} <span className="original-price">₹{product.originalPrice}</span> <span className="discount">{product.discount}% off</span></p>
+            <p className="product-description">{product.description}</p>
+            {product.variations?.map((variation, index) => (
+              <div key={index} className="product-variation">
+                <p className="variation-type">{variation.type}</p>
+                <p className="product-price">₹{variation.price.toFixed(2)}
+                  {variation.discount > 0 && (
+                    <>
+                      <span className="original-price"> ₹{(variation.price / (1 - variation.discount / 100)).toFixed(2)}</span>
+                      <span className="discount"> {variation.discount}% off</span>
+                    </>
+                  )}
+                </p>
+              </div>
+            ))}
             <p className="delivery-time">⚡ Today in 90 mins</p>
             <button className="add-to-cart-btn">+</button>
           </div>

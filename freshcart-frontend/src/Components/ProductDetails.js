@@ -20,7 +20,7 @@ const ProductDetails = () => {
         const response = await axios.get(`${API_URL}/products/${productId}`);
         setProduct(response.data);
 
-        const similarResponse = await axios.get(`${API_URL}/products?category=${response.data.category}`);
+        const similarResponse = await axios.get(`${API_URL}/products?category=${response.data.category._id}`);
         setSimilarProducts(similarResponse.data);
       } catch (err) {
         console.error('Error fetching product:', err);
@@ -46,8 +46,18 @@ const ProductDetails = () => {
           <h1>{product.name}</h1>
           <p className="text-muted">{product.description}</p>
           <h4 className="text-primary">₹{product.price}</h4>
-          <button className="btn btn-danger">Add to Cart and test</button>
-          <p className="text-success mt-3">Delivery in 90 mins</p>
+          <div className="variations">
+            {product.variations?.map((variation, index) => (
+              <div key={index} className="variation-option">
+                <span>{variation.type} - ₹{variation.price} </span>
+                {variation.discount > 0 && (
+                  <span className="discount">(Save {variation.discount}%)</span>
+                )}
+              </div>
+            ))}
+          </div>
+          <button className="btn btn-danger">Add to Cart</button>
+          <p className="text-success mt-3">Delivery in 14000 mins</p>
         </div>
       </div>
 

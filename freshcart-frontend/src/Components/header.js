@@ -23,7 +23,7 @@ export default function Header() {
     
         // Add a custom user-agent to comply with API requirements
         fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`, {
-          headers: {
+           headers: {
             'User-Agent': 'YourAppName/1.0 (your@email.com)',
           },
         })
